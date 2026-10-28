@@ -1,0 +1,68 @@
+{
+  "Rules": [
+    {
+      "SettingName": "SecureBootEnabled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-linux",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Secure Boot is disabled.", "Description": "Enable Secure Boot in UEFI, restart, and refresh compliance." }]
+    },
+    {
+      "SettingName": "DeviceEncryptionEnabled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-linux",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Disk encryption was not detected.", "Description": "Use LUKS full-disk encryption and refresh compliance." }]
+    },
+    {
+      "SettingName": "DefenderInstalled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/microsoft-defender-endpoint-linux",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Microsoft Defender for Endpoint is not installed.", "Description": "Run onboard-linux.sh with your Defender onboarding package." }]
+    },
+    {
+      "SettingName": "DefenderOnboarded",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/linux-install-manually",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Defender is not onboarded.", "Description": "Download a current Linux onboarding package from the Defender portal and rerun onboard-linux.sh." }]
+    },
+    {
+      "SettingName": "DefenderHealthy",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/health-status",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Defender is not healthy.", "Description": "Run mdatp health and check systemctl status mdatp." }]
+    },
+    {
+      "SettingName": "DefenderRealTimeProtectionEnabled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/linux-preferences",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Defender real-time protection is disabled.", "Description": "Review the managed Defender configuration and restart mdatp." }]
+    },
+    {
+      "SettingName": "HimmelblauInstalled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://github.com/himmelblau-idm/himmelblau",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Himmelblau is not installed.", "Description": "Rerun onboard-linux.sh without --skip-himmelblau; the script installs from the free Community Nightly channel." }]
+    },
+    {
+      "SettingName": "IntuneEnrollmentCompleted",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://github.com/himmelblau-idm/himmelblau",
+      "RemediationStrings": [{ "Language": "en_US", "Title": "Intune enrollment is incomplete.", "Description": "Restart and sign in with the full Entra UPN, then refresh compliance." }]
+    }
+  ]
+}

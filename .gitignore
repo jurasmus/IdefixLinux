@@ -1,0 +1,49 @@
+# Installation media and VM disks
+*.iso
+*.img
+*.qcow2
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+
+# Downloaded packages and temporary ISO workspaces
+*.deb
+onboarding-packages*/
+.ubuntu-onboarding.*/
+
+# Local build inputs, outputs, and tenant-specific material
+/private/
+/secrets/
+/tmp/
+/build/
+/dist/
+/output/
+/artifacts/
+
+# Defender onboarding/offboarding data and downloaded packages
+# Do not ignore all JSON: compliance/rules.json belongs in source control.
+*[Oo]nboard*.json
+*[Oo]ffboard*.json
+*[Oo]nboarding[Pp]ackage*
+*[Oo]ffboarding[Pp]ackage*
+MicrosoftDefenderATP[Oo]nboarding*
+MicrosoftDefenderATP[Oo]ffboarding*
+
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*.p12
+
+# Logs, editor backups, and OS metadata
+*.log
+*.log.*
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
