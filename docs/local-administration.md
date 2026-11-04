@@ -10,8 +10,11 @@ access. There is no `NOPASSWD` rule and no automatic root login.
 
 All mapped users in this local group are administrators; this is not an
 administrator-only Entra group policy. Approve this privilege model before
-rollout. Sudo authenticates through PAM; test expected password/PIN/MFA behavior
-with your tenant and package version. After signing in:
+rollout. Graphical Polkit administrator prompts recognize the active local
+session's Entra user from this group and authenticate that user through PAM;
+they do not require a separate local `Administrator` account. Sudo also
+authenticates through PAM; test expected password/PIN/MFA behavior with your
+tenant and package version. After signing in:
 
 ```bash
 id

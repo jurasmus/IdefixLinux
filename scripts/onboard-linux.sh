@@ -180,6 +180,16 @@ if [[ "$INSTALL_HIMMELBLAU" == true ]]; then
     install -m 0440 "$sudo_policy" /etc/sudoers.d/90-himmelblau-users
     rm -f -- "$sudo_policy"
     visudo -c
+    install -d -m 0755 /etc/polkit-1/rules.d
+    cat >/etc/polkit-1/rules.d/00-himmelblau-admin.rules <<'EOF'
+polkit.addAdminRule(function(action, subject) {
+    if (subject.local && subject.active &&
+        subject.isInGroup("himmelblau-users")) {
+        return ["unix-user:" + subject.user];
+    }
+});
+EOF
+    chmod 0644 /etc/polkit-1/rules.d/00-himmelblau-admin.rules
     install -m 0755 "$(dirname -- "${BASH_SOURCE[0]}")/configure-device-name.sh" /usr/local/sbin/linux-device-name
     cat >/usr/share/pam-configs/linux-device-name <<'EOF'
 Name: Name the device after its first successful Entra login

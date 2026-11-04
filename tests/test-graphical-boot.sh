@@ -203,8 +203,12 @@ printf '%%himmelblau-users ALL=(ALL:ALL) ALL\n' >"$workspace/sudo-policy"
 visudo -cf "$workspace/sudo-policy"
 grep -Fq "printf '%%himmelblau-users ALL=(ALL:ALL) ALL\\n'" "$script_directory/onboard-linux.sh"
 grep -Fq 'optional pam_exec.so quiet seteuid type=open_session /usr/local/sbin/linux-device-name --first-login' "$script_directory/onboard-linux.sh"
+grep -Fq 'install -d -m 0755 /etc/polkit-1/rules.d' "$script_directory/onboard-linux.sh"
+grep -Fq 'subject.isInGroup("himmelblau-users")' "$script_directory/onboard-linux.sh"
+grep -Fq 'return ["unix-user:" + subject.user];' "$script_directory/onboard-linux.sh"
+grep -Fq 'chmod 0644 /etc/polkit-1/rules.d/00-himmelblau-admin.rules' "$script_directory/onboard-linux.sh"
 ! grep -q NOPASSWD "$workspace/sudo-policy"
-printf 'PASS: the Entra group sudo policy validates and does not grant passwordless sudo.\n'
+printf 'PASS: Entra users receive authenticated sudo and active-session Polkit admin identity without passwordless access.\n'
 
 unshare --user --map-root-user --mount --fork bash -s -- "$payload_directory/configure-device-name.sh" <<'DEVICE_NAME'
 set -euo pipefail
